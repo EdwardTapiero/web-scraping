@@ -1,6 +1,4 @@
 import threading
-from time import sleep
-from turtle import delay
 
 import requests
 from bs4 import BeautifulSoup
