@@ -6,7 +6,7 @@ from service.functions import verify_reset
 app = Flask(__name__)
 
 
-@app.route('/mercadoLibre', methods=["GET"])
+@app.route('/api/v1/mercado_libre/consulta_marca', methods=["GET"])
 def mercado_libre():
     print("Started service")
 
@@ -20,7 +20,7 @@ def mercado_libre():
 
     print("Leaving service")
 
-    return jsonify({"Datos": {"Marca": brand, "Paginas buscadas": pag, "Registros encontrados": count_brand,
+    return jsonify({"Datos": {"Marca": brand, "Paginas buscadas": pag, "Registros encontrados por marca": count_brand,
                               "Nueva busqueda": reset}})
 
 
