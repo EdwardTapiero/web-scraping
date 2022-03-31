@@ -63,7 +63,7 @@ def __find_items(product):
     print(url)
     dom = html.fromstring(item.content)
 
-    marca = dom.xpath('//tr[@class="andes-table__row ui-vpp-striped-specs__row"]/th[text()="Marca"]/following-sibling::td/span/text()')[0]
+    marca = dom.xpath('//tr[@class="andes-table__row ui-vpp-striped-specs__row"]/th[text()="Marca"]/following-sibling::td/span/text()')
     ref = dom.xpath('//tr[@class="andes-table__row ui-vpp-striped-specs__row"]/th[text()="Línea"]/following-sibling::td/span/text()')
     modelo = dom.xpath('//tr[@class="andes-table__row ui-vpp-striped-specs__row"]/th[text()="Modelo"]/following-sibling::td/span/text()')[0]
     memoria_int = dom.xpath('//tr[@class="andes-table__row ui-vpp-striped-specs__row"]/th[text()="Memoria interna"]/following-sibling::td/span/text()')[0]
@@ -71,8 +71,10 @@ def __find_items(product):
     precio = dom.xpath('//div[@class="ui-pdp-price__second-line"]/span/span[@class="andes-money-amount__fraction"]/text()')[0]
 
     ref = 'null' if len(ref) == 0 else ref[0]
+    marca = 'null' if len(marca) == 0 else marca[0]
+
     event = threading.Event()
-    event.wait(2)
+    event.wait(3)
     return marca, memoria_int, memoria_ram, modelo, precio, ref
 
 
