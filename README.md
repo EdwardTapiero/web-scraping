@@ -72,3 +72,4 @@ http://localhost:5002/api/v1/mercado_libre/consulta_marca?reset=true&pagination=
   }
 }
 ```
+> Se adjunta postman
