@@ -58,12 +58,33 @@ def count_by_brand(brand):
 
         record = (brand, )
         sql = "SELECT COUNT(marca) FROM productos WHERE marca = %s"
+
         cursor.execute(sql, record)
         count = cursor.fetchall()
         cursor.close()
         connection.close()
         count = count[0]
         return int(count[0])
+
+    except mysql.connector.Error as error:
+        print("Failed to find into PostgreSQL table {}".format(error))
+
+
+def max_pag():
+    try:
+        connection = __connection_db()
+
+        cursor = connection.cursor()
+
+        sql ="SELECT MAX(pagina) FROM productos"
+
+        cursor.execute(sql)
+        pag = cursor.fetchall()
+        cursor.close()
+        connection.close()
+        pag = pag[0]
+
+        return int(pag[0])
 
     except mysql.connector.Error as error:
         print("Failed to find into PostgreSQL table {}".format(error))

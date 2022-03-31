@@ -17,10 +17,10 @@ def mercado_libre():
     brand = args.get("brand", default=BRAND, type=str)
 
     count_brand = verify_reset(reset, pag, brand)
-
+    
     print("Leaving service")
 
-    return jsonify({"Datos": {"Marca": brand, "Paginas buscadas": pag, "Registros encontrados por marca": count_brand,
+    return jsonify({"Datos": {"Marca": brand, "Paginas buscadas": count_brand[1], "Registros encontrados por marca": count_brand[0],
                               "Nueva busqueda": reset}})
 
 

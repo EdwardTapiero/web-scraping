@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from lxml import html
 
 from core.const import URL_MELI, USER_AGENT
-from repository.script import insert_product, delete_table, count_by_brand
+from repository.script import insert_product, delete_table, count_by_brand, max_pag
 
 headers = {
     "user-agent": USER_AGENT
@@ -48,7 +48,7 @@ def __find_page(pag, brand):
         url_page = dom_page.xpath('//div[@class="ui-search-pagination"]/ul/li[contains(@class,"--next")]/a')[0].get(
             'href')
 
-    return count_by_brand(brand)
+    return count_by_brand(brand), max_pag()
 
 
 def __insert_data(ini):
@@ -72,9 +72,9 @@ def __find_items(product):
 
     ref = 'null' if len(ref) == 0 else ref[0]
     event = threading.Event()
-    event.wait(1)
+    event.wait(2)
     return marca, memoria_int, memoria_ram, modelo, precio, ref
 
 
 def __find_data(marca):
-    return count_by_brand(marca)
+    return count_by_brand(marca), max_pag()
