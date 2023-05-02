@@ -3,9 +3,10 @@ import mysql.connector
 
 def __connection_db():
     connection = mysql.connector.connect(user='root',
-                                         password='root1234',
+                                         password='root',
                                          host='localhost',
-                                         database='mercado_libre')
+                                         port='53306',
+                                         database='mercado_libre',)
     return connection
 
 
@@ -67,7 +68,7 @@ def count_by_brand(brand):
         return int(count[0])
 
     except mysql.connector.Error as error:
-        print("Failed to find into PostgreSQL table {}".format(error))
+        print("Failed to find into PostgreSQL table b{}".format(error))
 
 
 def max_pag():
@@ -87,4 +88,4 @@ def max_pag():
         return int(pag[0])
 
     except mysql.connector.Error as error:
-        print("Failed to find into PostgreSQL table {}".format(error))
+        print("Failed to find into PostgreSQL table a{}".format(error))

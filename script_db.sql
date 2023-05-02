@@ -1,3 +1,5 @@
+use mercado_libre;
+
 create table productos
 (
     id          int auto_increment,

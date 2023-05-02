@@ -33,7 +33,7 @@ def __find_page(pag, brand):
 
             soup = BeautifulSoup(response_page.content, 'html.parser')
             dom_page = html.fromstring(response_page.content)
-            products = soup.find_all('a', attrs={"class": "ui-search-item__group__element ui-search-link"})
+            products = soup.find_all('a', attrs={"class": "ui-search-item__group__element shops__items-group-details ui-search-link"})
 
             ini = soup.find('span', attrs={"class": "andes-pagination__link"}).text
             ini = int(ini)
@@ -45,7 +45,7 @@ def __find_page(pag, brand):
         if pag == ini:
             break
 
-        url_page = dom_page.xpath('//div[@class="ui-search-pagination"]/ul/li[contains(@class,"--next")]/a')[0].get(
+        url_page = dom_page.xpath('//div[contains(@class, "ui-search-pagination")]/ul/li[contains(@class,"--next")]/a')[0].get(
             'href')
 
     return count_by_brand(brand), max_pag()
@@ -65,16 +65,20 @@ def __find_items(product):
 
     marca = dom.xpath('//tr[@class="andes-table__row ui-vpp-striped-specs__row"]/th[text()="Marca"]/following-sibling::td/span/text()')
     ref = dom.xpath('//tr[@class="andes-table__row ui-vpp-striped-specs__row"]/th[text()="Línea"]/following-sibling::td/span/text()')
-    modelo = dom.xpath('//tr[@class="andes-table__row ui-vpp-striped-specs__row"]/th[text()="Modelo"]/following-sibling::td/span/text()')[0]
-    memoria_int = dom.xpath('//tr[@class="andes-table__row ui-vpp-striped-specs__row"]/th[text()="Memoria interna"]/following-sibling::td/span/text()')[0]
-    memoria_ram = dom.xpath('//tr[@class="andes-table__row ui-vpp-striped-specs__row"]/th[text()="Memoria RAM"]/following-sibling::td/span/text()')[0]
-    precio = dom.xpath('//div[@class="ui-pdp-price__second-line"]/span/span[@class="andes-money-amount__fraction"]/text()')[0]
+    modelo = dom.xpath('//tr[@class="andes-table__row ui-vpp-striped-specs__row"]/th[text()="Modelo"]/following-sibling::td/span/text()')
+    memoria_int = dom.xpath('//tr[@class="andes-table__row ui-vpp-striped-specs__row"]/th[text()="Memoria interna"]/following-sibling::td/span/text()')
+    memoria_ram = dom.xpath('//tr[@class="andes-table__row ui-vpp-striped-specs__row"]/th[text()="Memoria RAM"]/following-sibling::td/span/text()')
+    precio = dom.xpath('//div[@class="ui-pdp-price__second-line"]/span/span[@class="andes-money-amount__fraction"]/text()')
 
     ref = 'null' if len(ref) == 0 else ref[0]
     marca = 'null' if len(marca) == 0 else marca[0]
+    modelo = 'null' if len(modelo) == 0 else modelo[0]
+    memoria_int = 'null' if len(memoria_int) == 0 else memoria_int[0]
+    memoria_ram = 'null' if len(memoria_ram) == 0 else memoria_ram[0]
+    precio = 'null' if len(precio) == 0 else precio[0]
 
     event = threading.Event()
-    event.wait(3)
+    event.wait(2)
     return marca, memoria_int, memoria_ram, modelo, precio, ref
 
 
